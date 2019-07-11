@@ -6,7 +6,7 @@ const App = () => {
     const [resource, setResource] = useState('posts'); // 'posts' is initial value/state. Just want the value, no key like in this.state!
     // ^ resource === the current value/state && setResource === a "setter" function (like this.setState)
     
-    // const [currentCount, setCount] = useSTate(0)
+    // const [currentCount, setCount] = useState(0)
     return (
         <div>
           <div>
