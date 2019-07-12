@@ -2,16 +2,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const ResourceList = () => {
+const ResourceList = ({ resource }) => {
   const [resources, setResources] = useState([]);
 
   const fetchResource = async () => {
     const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/${this.props.resource}`
+      `https://jsonplaceholder.typicode.com/${resource}`
     );
 
-    this.setState({ resources: response.data });
+    //this.setState({ resources: response.data });
+      setResources(response.data)
   };
+
+  // useEffect runs only when value in [resource] changes
+  // if array is empty in useEffect, we have the equivalent of a componentDidMount()
+  useEffect(() => {
+    // resource is a prop passed into this component
+    fetchResource(resource)
+  }, [resource]) // element will toggle between 'posts' and 'todos'
 
   return <div>{resources.length}</div>;
 
