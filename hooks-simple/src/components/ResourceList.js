@@ -1,45 +1,57 @@
-// import hooks from React library
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import useResources from './useResources';
 
 const ResourceList = ({ resource }) => {
-  const [resources, setResources] = useState([]);
-
-  const fetchResource = async () => {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/${resource}`
-    );
-
-    //this.setState({ resources: response.data });
-    setResources(response.data);
-  };
-
-  // useEffect runs only when value in second parameter/array [resource] changes
-  // if array is empty in useEffect, we have the equivalent of a componentDidMount()
-  useEffect(() => {
-    // resource is a prop passed into this component
-    fetchResource(resource);
-  }, [resource]); // element will toggle between 'posts' and 'todos'
-
-  /*
-    ALTERNATIVE CODE FOR FETCHRESOURCE AND USEEFFECT:
-    useEffect(
-      () => {
-        (async resource => {
-          const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`
-        );
-
-      setResources(response.data)
-        })(resource)
-      },
-      [resource]
-    );
-    
-  */
+  const resources = useResources(resource);
   return (
-  <ul>{resources.map(record => <li key={record.id}>{record.title}</li>)}</ul>
-  )
+    <ul>
+      {resources.map(record => (
+        <li id={record.id}>{record.title}</li>
+      ))}
+    </ul>
+  );
 };
+
+
+// const ResourceList = ({ resource }) => {
+
+//   const [resources, setResources] = useState([]);
+
+//   const fetchResource = async () => {
+//     const response = await axios.get(
+//       `https://jsonplaceholder.typicode.com/${resource}`
+//     );
+
+//     //this.setState({ resources: response.data });
+//     setResources(response.data);
+//   };
+
+//   // useEffect runs only when value in second parameter/array [resource] changes
+//   // if array is empty in useEffect, we have the equivalent of a componentDidMount()
+//   useEffect(() => {
+//     // resource is a prop passed into this component
+//     fetchResource(resource);
+//   }, [resource]); // element will toggle between 'posts' and 'todos'
+
+//   /*
+//     ALTERNATIVE CODE FOR FETCHRESOURCE AND USEEFFECT:
+//     useEffect(
+//       () => {
+//         (async resource => {
+//           const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`
+//         );
+
+//       setResources(response.data)
+//         })(resource)
+//       },
+//       [resource]
+//     );
+    
+//   */
+//   return (
+//   <ul>{resources.map(record => <li key={record.id}>{record.title}</li>)}</ul>
+//   )
+// };
 
 // class ResourceList extends React.Component {
 //   state = { resources: [] };

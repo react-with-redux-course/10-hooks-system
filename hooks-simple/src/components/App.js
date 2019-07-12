@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ResourceList from './ResourceList';
+import UserList from './UserList';
 
 const App = () => {
     // array destructuring: useState returns an array with 2 elements inside of it
@@ -9,6 +10,7 @@ const App = () => {
     // const [currentCount, setCount] = useState(0)
     return (
         <div>
+          <UserList />
           <div>
               {/* whenever we call setResource, we are changing the resource, or 'this.state'*/}
               <button onClick={() => setResource('posts')}>Posts</button>
