@@ -11,18 +11,34 @@ const ResourceList = ({ resource }) => {
     );
 
     //this.setState({ resources: response.data });
-      setResources(response.data)
+    setResources(response.data);
   };
 
-  // useEffect runs only when value in [resource] changes
+  // useEffect runs only when value in second parameter/array [resource] changes
   // if array is empty in useEffect, we have the equivalent of a componentDidMount()
   useEffect(() => {
     // resource is a prop passed into this component
-    fetchResource(resource)
-  }, [resource]) // element will toggle between 'posts' and 'todos'
+    fetchResource(resource);
+  }, [resource]); // element will toggle between 'posts' and 'todos'
 
-  return <div>{resources.length}</div>;
+  /*
+    ALTERNATIVE CODE FOR FETCHRESOURCE AND USEEFFECT:
+    useEffect(
+      () => {
+        (async resource => {
+          const response = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`
+        );
 
+      setResources(response.data)
+        })(resource)
+      },
+      [resource]
+    );
+    
+  */
+  return (
+  <ul>{resources.map(record => <li key={record.id}>{record.title}</li>)}</ul>
+  )
 };
 
 // class ResourceList extends React.Component {
